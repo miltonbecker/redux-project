@@ -16,7 +16,19 @@ class CommentForm extends Component {
                         <input type='text' placeholder='Username' className='form-control' ref={node => { this.username = node }} />
                         <input type='text' placeholder='E-mail (optional)' className='form-control' ref={node => { this.email = node }} />
                         <textarea rows='5' placeholder='Comment' className='form-control' ref={node => { this.content = node }} />
-                        <button type='submit' className='btn btn-primary'>Submit</button>
+                        {this.props.adding &&
+                            <button type='submit' className='btn btn-primary' disabled>Submitting...</button>
+                        }
+                        {!this.props.adding &&
+                            <button type='submit' className='btn btn-primary'>Submit</button>
+                        }
+                        {this.props.addingError &&
+                            <div className="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                Oops, there was an error submitting your comment.<br />
+                                This is the error text: {this.props.addingError}
+                            </div>
+                        }
                     </form>
                 </div>
             </div>
@@ -56,4 +68,11 @@ class CommentForm extends Component {
     }
 }
 
-export default connect()(CommentForm);
+const mapStateToProps = (state) => {
+    return {
+        adding: state.adding,
+        addingError: state.addingError
+    };
+}
+
+export default connect(mapStateToProps)(CommentForm);

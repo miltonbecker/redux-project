@@ -1,16 +1,55 @@
+import * as actions from './actions';
+
 function comments(state = [], action) {
     switch (action.type) {
-        case 'ADD_COMMENT':
+        case actions.FETCHED_COMMENTS:
             return [
-                ...state,
-                {
-                    username: action.username,
-                    email: action.email,
-                    content: action.content,
-                    id: action.id,
-                    date: action.date
-                }
+                ...action.result
             ];
+        case actions.FETCHING_ERROR:
+            return [];
+        default:
+            return state;
+    }
+}
+
+function fetch(state = false, action) {
+    switch (action.type) {
+        case actions.FETCHING_COMMENTS:
+            return true;
+        case actions.FETCHED_COMMENTS:
+        case actions.FETCHING_ERROR:    
+            return false;
+        default:
+            return state;
+    }
+}
+
+function add(state = false, action) {
+    switch (action.type) {
+        case actions.ADDING_COMMENT:
+            return true;
+        case actions.ADDED_COMMENT:
+        case actions.ADDING_ERROR:    
+            return false;
+        default:
+            return state;
+    }
+}
+
+function fetchError(state = undefined, action) {
+    switch (action.type) {
+        case actions.FETCHING_ERROR: 
+            return action.error;    
+        default:
+            return state;
+    }
+}
+
+function addError(state = undefined, action) {
+    switch (action.type) {
+        case actions.ADDING_ERROR:    
+            return action.error;
         default:
             return state;
     }
@@ -18,7 +57,11 @@ function comments(state = [], action) {
 
 function commentApp(state = {}, action) {
     return {
-        comments: comments(state.comments, action)
+        adding: add(state.adding, action),
+        fetching: fetch(state.fetching, action),
+        comments: comments(state.comments, action),
+        fetchingError: fetchError(state.fetchingError, action),
+        addingError: addError(state.addingError, action)
     };
 }
 
