@@ -1,4 +1,5 @@
 # To run this branch:
 
 1. npm install
-2. open http://localhost:8000
+2. npm start
+3. open http://localhost:8000
