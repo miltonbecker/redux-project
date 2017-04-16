@@ -1,0 +1,14 @@
+.form-control, #comment-form {
+    margin-bottom: 5px;
+}
+
+footer {
+    font-size: 0.9em;
+    color: darkgray;
+    text-align: right;
+}
+
+footer a {
+    color: darkgray;
+    text-decoration: underline;
+}
