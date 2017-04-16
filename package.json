@@ -1,11 +1,11 @@
 {
-  "name": "react-transform-boilerplate",
-  "version": "1.1.1",
-  "description": "A new Webpack boilerplate with hot reloading React components, and error handling on module and component level.",
+  "name": "comment-app",
+  "version": "1.0.0",
+  "description": "A Comment App!",
   "scripts": {
     "clean": "rimraf dist",
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build": "npm run clean && npm run build:webpack",
+    "build": "npm run clean && npm run build:webpack && docker build -t milton/comment-app .",
     "start": "node devServer.js",
     "lint": "eslint src",
     "release": "npm version patch"
