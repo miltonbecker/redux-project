@@ -1,12 +1,10 @@
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
-const config = require('./webpack.config.dev');
 const db = require('./db/postgres');
 const parser = require('body-parser');
 
 const app = express();
-const compiler = webpack(config);
 
 const jsonParser = parser.json({
   verify: function (req, res, buf, enc) {
@@ -18,15 +16,6 @@ const jsonParser = parser.json({
     }
   }
 });
-
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
-}));
-
-app.use(require('webpack-hot-middleware')(compiler));
-
-app.use(express.static('public'));
 
 app.get('/api/comments', function (req, res) {
   const query = 'SELECT id, username, email, content, date'
@@ -56,6 +45,8 @@ app.post('/api/comments', jsonParser, function (req, res) {
     }
   });
 });
+
+app.use(express.static('public'));
 
 const port = 8000;
 
