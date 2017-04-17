@@ -45,15 +45,13 @@ function addingError(err) {
     }
 }
 
-const host = window.location.host;
-
 export function fetchComments() {
 
     return function (dispatch) {
 
         dispatch(fetchingComments());
 
-        return $.get(`${host}/api/comments`)
+        return $.get('api/comments')
             .done((data) => {
                 dispatch(fetchedComments(JSON.parse(data)));
             })
@@ -69,7 +67,7 @@ export function addComment(json) {
 
         dispatch(addingComment());
 
-        return $.ajax(`${host}/api/comments`, {
+        return $.ajax('api/comments', {
             data: JSON.stringify(json),
             contentType: 'application/json',
             type: 'POST'
