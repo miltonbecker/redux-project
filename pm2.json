@@ -1,0 +1,16 @@
+{
+    "apps": [
+        {
+            "name": "comment-app",
+            "script": "devServer.js",
+            "watch": true,
+            "merge_logs": true,
+            "env": {
+                "NODE_ENV": "production",
+                "PG_USER": "rev",
+                "PG_DATABASE": "rev",
+                "PG_PASSWORD": "rev",
+            }
+        }
+    ]
+}
