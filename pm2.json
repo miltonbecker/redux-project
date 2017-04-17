@@ -9,7 +9,7 @@
                 "NODE_ENV": "production",
                 "PG_USER": "rev",
                 "PG_DATABASE": "rev",
-                "PG_PASSWORD": "rev",
+                "PG_PASSWORD": "rev"
             }
         }
     ]
