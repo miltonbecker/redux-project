@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const webpack = require('webpack');
 const db = require('./db/postgres');
 const parser = require('body-parser');
 
