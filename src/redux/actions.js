@@ -73,10 +73,8 @@ export function addComment(json) {
             type: 'POST'
         })
             .done((data) => {
-                if (JSON.parse(data)) {
-                    dispatch(addedComment());
-                    dispatch(fetchComments());
-                }
+                dispatch(addedComment());
+                dispatch(fetchComments());
             })
             .fail((jqObj, error, statusText) => {
                 dispatch(addingError(statusText));
