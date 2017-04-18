@@ -1,6 +1,7 @@
 I went ahead and created this branch.
+It is live at http://miltonbecker.com:8001
 
-The changes:
+#The changes:
 
 * Adding a comment now follows an optimistic approach, that is:
   * The comment gets added instantaneously 
@@ -27,5 +28,3 @@ The changes:
 * Improved the css to use color inheritance instead of setting the same color twice
 
 * Changed some variable and function names to improve code readability 
-
-This branch is live at http://miltonbecker.com:8001
