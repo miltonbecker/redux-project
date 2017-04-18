@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
 import { connect } from 'react-redux';
-import { fetchComments } from '../redux/actions';
+import { fetchComments, deleteComment } from '../redux/actions';
 
 class CommentList extends Component {
 
     render() {
         return (
             <div className='row'>
-                <div className='col-md-6 col-md-offset-2'>
+                <div className='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
                     <h2>Comments</h2>
+                    {this.props.fetchingError &&
+                        <div className="alert alert-danger" role="alert">
+                            There was an error getting the comments from the server.<br />
+                            Try refreshing the page.
+                        </div>
+                    }
+
+                    {this.props.deletingError &&
+                        <div className="alert alert-danger" role="alert">
+                            Oops, there was an error deleting the comment from the server.
+                        </div>
+                    }
+
                     {this.props.fetching &&
                         <p>Getting comments...</p>}
+
                     {!this.props.fetching &&
                         this.props.comments.map(comment => (
-                            <Comment key={comment.id} username={comment.username} email={comment.email} date={comment.date} content={comment.content} />
+                            <Comment key={comment.id || comment.key} id={comment.id} username={comment.username} email={comment.email} date={comment.date} content={comment.content} onDelete={this.props.commentDelete} />
                         ))}
-                    {this.props.fetchingError &&
-                        <p>Problem getting comments: {this.props.fetchingError}</p>}
                 </div>
             </div>
         );
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchComments());
+        this.props.getComments();
     }
 
 }
@@ -33,8 +45,23 @@ const mapStateToProps = (state) => {
     return {
         fetching: state.fetching,
         comments: state.comments,
-        fetchingError: state.fetchingError
+        fetchingError: state.fetchingError,
+        deletingError: state.deletingError
     };
 }
 
-export default connect(mapStateToProps)(CommentList);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        commentDelete: (id) => {
+            if (!confirm('Are you sure you want to delete the comment?')) {
+                return;
+            }
+            dispatch(deleteComment(id));
+        },
+        getComments: () => {
+            dispatch(fetchComments());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentList);

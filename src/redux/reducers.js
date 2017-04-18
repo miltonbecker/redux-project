@@ -6,50 +6,62 @@ function comments(state = [], action) {
             return [
                 ...action.result
             ];
-        case actions.FETCHING_ERROR:
-            return [];
+        case actions.ADDED_COMMENT:
+            return [
+                action.comment,
+                ...state
+            ];
+        case actions.DELETED_COMMENT:
+            let index = state.findIndex((comment) => comment.id == action.id || comment.key == action.id);
+            return [
+                ...state.slice(0, index),
+                ...state.slice(index + 1)
+            ];
         default:
             return state;
     }
 }
 
-function fetch(state = false, action) {
+function fetching(state = false, action) {
     switch (action.type) {
         case actions.FETCHING_COMMENTS:
             return true;
         case actions.FETCHED_COMMENTS:
-        case actions.FETCHING_ERROR:    
+        case actions.FETCHING_ERROR:
             return false;
         default:
             return state;
     }
 }
 
-function add(state = false, action) {
+function fetchingError(state = undefined, action) {
     switch (action.type) {
-        case actions.ADDING_COMMENT:
-            return true;
-        case actions.ADDED_COMMENT:
-        case actions.ADDING_ERROR:    
-            return false;
-        default:
-            return state;
-    }
-}
-
-function fetchError(state = undefined, action) {
-    switch (action.type) {
-        case actions.FETCHING_ERROR: 
-            return action.error;    
-        default:
-            return state;
-    }
-}
-
-function addError(state = undefined, action) {
-    switch (action.type) {
-        case actions.ADDING_ERROR:    
+        case actions.FETCHING_ERROR:
             return action.error;
+        case actions.CLEAR_ERRORS:
+            return undefined;
+        default:
+            return state;
+    }
+}
+
+function addingError(state = undefined, action) {
+    switch (action.type) {
+        case actions.ADDING_ERROR:
+            return action.error;
+        case actions.CLEAR_ERRORS:
+            return undefined;
+        default:
+            return state;
+    }
+}
+
+function deletingError(state = undefined, action) {
+    switch (action.type) {
+        case actions.DELETING_ERROR:
+            return action.error;
+        case actions.CLEAR_ERRORS:
+            return undefined;
         default:
             return state;
     }
@@ -57,11 +69,11 @@ function addError(state = undefined, action) {
 
 function commentApp(state = {}, action) {
     return {
-        adding: add(state.adding, action),
-        fetching: fetch(state.fetching, action),
+        fetching: fetching(state.fetching, action),
         comments: comments(state.comments, action),
-        fetchingError: fetchError(state.fetchingError, action),
-        addingError: addError(state.addingError, action)
+        fetchingError: fetchingError(state.fetchingError, action),
+        addingError: addingError(state.addingError, action),
+        deletingError: deletingError(state.deletingError, action)
     };
 }
 

@@ -8,25 +8,20 @@ class CommentForm extends Component {
     render() {
         return (
             <div className='row'>
-                <div className='col-md-6 col-md-offset-2'>
+                <div className='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
                     <h3>Add your comment</h3>
-                    <form id='comment-form' onSubmit={event => {
-                        this.submitCb(event, this.username, this.email, this.content);
+                    <form id='comment-form' onSubmit={(event) => {
+                        event.preventDefault();
+                        this.submitCb(this.username, this.email, this.content);
                     }}>
                         <input type='text' placeholder='Username' className='form-control' ref={node => { this.username = node }} />
                         <input type='text' placeholder='E-mail (optional)' className='form-control' ref={node => { this.email = node }} />
                         <textarea rows='5' placeholder='Comment' className='form-control' ref={node => { this.content = node }} />
-                        {this.props.adding &&
-                            <button type='submit' className='btn btn-primary' disabled>Submitting...</button>
-                        }
-                        {!this.props.adding &&
-                            <button type='submit' className='btn btn-primary'>Submit</button>
-                        }
+                        <button type='submit' className='btn btn-primary'>Submit</button>
+                       
                         {this.props.addingError &&
-                            <div className="alert alert-danger alert-dismissible" role="alert">
-                                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                Oops, there was an error submitting your comment.<br />
-                                This is the error text: {this.props.addingError}
+                            <div className="alert alert-danger" role="alert">
+                                Oops, there was an error submitting your comment to the server.
                             </div>
                         }
                     </form>
@@ -35,9 +30,7 @@ class CommentForm extends Component {
         );
     }
 
-    submitCb(event, inputUsername, inputEmail, inputContent) {
-        event.preventDefault();
-
+    submitCb(inputUsername, inputEmail, inputContent) {
         const username = inputUsername.value.trim();
         const email = inputEmail.value.trim();
         const content = inputContent.value.trim();
@@ -70,7 +63,6 @@ class CommentForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        adding: state.adding,
         addingError: state.addingError
     };
 }

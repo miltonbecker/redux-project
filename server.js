@@ -45,9 +45,34 @@ app.post('/api/comments', jsonParser, function (req, res) {
   });
 });
 
+app.delete('/api/comments/:id', function (req, res) {
+  const query = 'DELETE FROM comments WHERE id = $1';
+
+  db.query(query, [ req.params.id ], (dbError, dbRes) => {
+    if (dbError)
+      res.status(500).json('Database error: ' + dbError);
+    else
+      res.json(JSON.stringify(dbRes.rowCount));
+  });
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  const webpack = require('webpack');
+  const config = require('./webpack.config.dev');
+
+  const compiler = webpack(config);
+
+  app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  }));
+
+  app.use(require('webpack-hot-middleware')(compiler));
+}
+
 app.use(express.static('public'));
 
-const port = 8000;
+const port = process.env.APP_PORT || 8000;
 
 app.listen(port, function (err) {
   if (err) {

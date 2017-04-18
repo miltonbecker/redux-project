@@ -1,8 +1,8 @@
 {
     "apps": [
         {
-            "name": "comment-app",
-            "script": "devServer.js",
+            "name": "comment-app-2",
+            "script": "server.js",
             "watch": true,
             "merge_logs": true,
             "env": {

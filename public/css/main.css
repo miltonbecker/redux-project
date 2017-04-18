@@ -2,13 +2,21 @@
     margin-bottom: 5px;
 }
 
+.delete, .delete:hover {
+    color: red;
+}
+
+textarea {
+    resize: none;
+}
+
 footer {
     font-size: 0.9em;
-    color: darkgray;
+    color: #777;
     text-align: right;
 }
 
 footer a {
-    color: darkgray;
+    color: inherit;
     text-decoration: underline;
 }
