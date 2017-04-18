@@ -13,7 +13,7 @@ It is live at http://miltonbecker.com:8001
   * If there is an error on the server side, the user is notified and that comment gets removed
 
 * Deleting a comment also follows an optimistic approach:
-  * The comments gets deleted instantaneously
+  * The comment gets deleted instantaneously
   * If there is an error on the server side, the user is notified and the comments are re-fetched from the server
 
 * Renamed `devServer.js` to simply `server.js`
