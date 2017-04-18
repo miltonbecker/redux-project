@@ -1,7 +1,7 @@
 I went ahead and created this branch.
 It is live at http://miltonbecker.com:8001
 
-#The changes:
+# The changes:
 
 * Adding a comment now follows an optimistic approach, that is:
   * The comment gets added instantaneously 
