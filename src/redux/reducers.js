@@ -1,4 +1,5 @@
 import * as actions from './actions';
+import { combineReducers } from 'redux';
 
 function comments(state = [], action) {
     switch (action.type) {
@@ -34,47 +35,45 @@ function fetching(state = false, action) {
     }
 }
 
-function fetchingError(state = undefined, action) {
+function fetchingError(state = '', action) {
     switch (action.type) {
         case actions.FETCHING_ERROR:
             return action.error;
         case actions.CLEAR_ERRORS:
-            return undefined;
+            return '';
         default:
             return state;
     }
 }
 
-function addingError(state = undefined, action) {
+function addingError(state = '', action) {
     switch (action.type) {
         case actions.ADDING_ERROR:
             return action.error;
         case actions.CLEAR_ERRORS:
-            return undefined;
+            return '';
         default:
             return state;
     }
 }
 
-function deletingError(state = undefined, action) {
+function deletingError(state = '', action) {
     switch (action.type) {
         case actions.DELETING_ERROR:
             return action.error;
         case actions.CLEAR_ERRORS:
-            return undefined;
+            return '';
         default:
             return state;
     }
 }
 
-function commentApp(state = {}, action) {
-    return {
-        fetching: fetching(state.fetching, action),
-        comments: comments(state.comments, action),
-        fetchingError: fetchingError(state.fetchingError, action),
-        addingError: addingError(state.addingError, action),
-        deletingError: deletingError(state.deletingError, action)
-    };
-}
+const commentApp = combineReducers({
+    fetching,
+    comments,
+    fetchingError,
+    addingError,
+    deletingError
+});
 
 export default commentApp;
