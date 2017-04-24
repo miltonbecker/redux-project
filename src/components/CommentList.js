@@ -28,8 +28,9 @@ class CommentList extends Component {
 
                     {!this.props.fetching &&
                         this.props.comments.map(comment => (
-                            <Comment key={comment.id || comment.key} id={comment.id} username={comment.username} email={comment.email} date={comment.date} content={comment.content} onDelete={this.props.commentDelete} />
-                        ))}
+                            <Comment {...comment} key={comment.id || comment.key} onDelete={this.props.onDelete} />
+                        ))
+                    }
                 </div>
             </div>
         );
@@ -52,7 +53,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        commentDelete: (id) => {
+        onDelete: (id) => {
             if (!confirm('Are you sure you want to delete the comment?')) {
                 return;
             }
