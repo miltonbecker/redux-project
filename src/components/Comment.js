@@ -11,7 +11,7 @@ class Comment extends Component {
                         <p>
                             {this.props.id &&
                                 <button type="button" title="Delete Comment" className="close delete" aria-label="Delete Comment"
-                                    onClick={() => { this.props.onDelete(this.props.id) }}>
+                                    onClick={this.props.onDelete}>
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             }
