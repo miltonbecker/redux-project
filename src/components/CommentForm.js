@@ -14,11 +14,11 @@ class CommentForm extends Component {
                         event.preventDefault();
                         this.submitCb(this.username, this.email, this.content);
                     }}>
-                        <input type='text' placeholder='Username' className='form-control' ref={node => { this.username = node }} />
-                        <input type='text' placeholder='E-mail (optional)' className='form-control' ref={node => { this.email = node }} />
-                        <textarea rows='5' placeholder='Comment' className='form-control' ref={node => { this.content = node }} />
+                        <input type='text' placeholder='Username' className='form-control' ref={(node) => { this.username = node }} />
+                        <input type='text' placeholder='E-mail (optional)' className='form-control' ref={(node) => { this.email = node }} />
+                        <textarea rows='5' placeholder='Comment' className='form-control' ref={(node) => { this.content = node }} />
                         <button type='submit' className='btn btn-primary'>Submit</button>
-                       
+
                         {this.props.addingError &&
                             <div className="alert alert-danger" role="alert">
                                 Oops, there was an error submitting your comment to the server.
