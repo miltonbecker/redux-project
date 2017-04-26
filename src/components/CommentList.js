@@ -39,7 +39,7 @@ class CommentList extends Component {
     }
 
     componentDidMount() {
-        this.props.getComments();
+        this.props.fetchComments();
     }
 
 }
@@ -53,18 +53,14 @@ const mapStateToProps = (state) => {
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onDelete: (id) => {
-            if (!confirm('Are you sure you want to delete the comment?')) {
-                return;
-            }
-            dispatch(deleteComment(id));
-        },
-        getComments: () => {
-            dispatch(fetchComments());
+const mapDispatchToProps = {
+    onDelete: (id) => {
+        if (!confirm('Are you sure you want to delete the comment?')) {
+            return;
         }
-    }
+        return deleteComment(id);
+    },
+    fetchComments
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentList);
