@@ -23,16 +23,15 @@ class CommentList extends Component {
                         </div>
                     }
 
-                    {this.props.fetching &&
-                        <p>Getting comments...</p>}
-
-                    {!this.props.fetching &&
-                        this.props.comments.map((comment) => (
-                            <Comment {...comment}
-                                key={comment.id || comment.key}
-                                onDelete={() => { this.props.onDelete(comment.id) }} />
-                        ))
+                    {this.props.fetching && !this.props.comments.length &&
+                        <p>Getting comments...</p>
                     }
+
+                    {this.props.comments.map((comment) => (
+                        <Comment {...comment}
+                            key={comment.id || comment.key}
+                            onDelete={() => { this.props.onDelete(comment.id) }} />
+                    ))}
                 </div>
             </div>
         );

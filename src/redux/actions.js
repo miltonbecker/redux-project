@@ -66,12 +66,11 @@ function clearErrors() {
     }
 }
 
-export function fetchComments(quiet = false) {
+export function fetchComments() {
 
     return function (dispatch) {
 
-        if (!quiet)
-            dispatch(fetchingComments());
+        dispatch(fetchingComments());
 
         return $.get('api/comments')
             .done((data) => {
@@ -89,7 +88,7 @@ export function addComment(obj) {
 
         dispatch(clearErrors());
 
-        let softKey = uuid();        
+        let softKey = uuid();
         let tempComment = Object.assign({}, obj, { key: softKey });
 
         dispatch(addedComment(tempComment));
@@ -100,7 +99,7 @@ export function addComment(obj) {
             type: 'POST'
         })
             .done((data) => {
-                dispatch(fetchComments(true));
+                dispatch(fetchComments());
             })
             .fail((jqObj, error, statusText) => {
                 dispatch(deletedComment(softKey));
