@@ -1,7 +1,7 @@
 {
     "apps": [
         {
-            "name": "comment-app-2",
+            "name": "redux-project",
             "script": "server.js",
             "watch": true,
             "merge_logs": true,

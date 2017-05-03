@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "A Comment App!",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf public/dist",
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
     "docker": "npm run clean && npm run build:webpack && docker build -t milton/comment-app .",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/miltonbecker/comment-app.git"
+    "url": "https://github.com/miltonbecker/redux-project.git"
   },
   "keywords": [
     "react",
@@ -32,9 +32,9 @@
   "author": "Milton Becker Junior (https://github.com/miltonbecker)",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/miltonbecker/comment-app/issues"
+    "url": "https://github.com/miltonbecker/redux-project/issues"
   },
-  "homepage": "https://github.com/miltonbecker/comment-app",
+  "homepage": "https://github.com/miltonbecker/redux-project",
   "devDependencies": {
     "babel-core": "^6.6.5",
     "babel-eslint": "^5.0.0-beta4",
