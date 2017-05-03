@@ -1,7 +1,7 @@
 import * as actions from './actions';
 import { combineReducers } from 'redux';
 
-function comments(state = [], action) {
+const comments = (state = [], action) => {
     switch (action.type) {
         case actions.FETCHED_COMMENTS:
             return [
@@ -21,9 +21,9 @@ function comments(state = [], action) {
         default:
             return state;
     }
-}
+};
 
-function fetching(state = false, action) {
+const fetching = (state = false, action) => {
     switch (action.type) {
         case actions.FETCHING_COMMENTS:
             return true;
@@ -33,40 +33,40 @@ function fetching(state = false, action) {
         default:
             return state;
     }
-}
+};
 
-function fetchingError(state = '', action) {
+const fetchingError = (state = null, action) => {
     switch (action.type) {
         case actions.FETCHING_ERROR:
             return action.error;
         case actions.CLEAR_ERRORS:
-            return '';
+            return null;
         default:
             return state;
     }
-}
+};
 
-function addingError(state = '', action) {
+const addingError = (state = null, action) => {
     switch (action.type) {
         case actions.ADDING_ERROR:
             return action.error;
         case actions.CLEAR_ERRORS:
-            return '';
+            return null;
         default:
             return state;
     }
-}
+};
 
-function deletingError(state = '', action) {
+const deletingError = (state = null, action) => {
     switch (action.type) {
         case actions.DELETING_ERROR:
             return action.error;
         case actions.CLEAR_ERRORS:
-            return '';
+            return null;
         default:
             return state;
     }
-}
+};
 
 const commentApp = combineReducers({
     fetching,
