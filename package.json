@@ -6,7 +6,7 @@
     "clean": "rimraf public/dist",
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "docker": "npm run clean && npm run build:webpack && docker build -t milton/comment-app .",
+    "docker": "npm run build && docker build -t milton/comment-app .",
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "node server.js",
     "lint": "eslint src",
