@@ -1,17 +1,17 @@
 {
-    "apps": [
-        {
-            "name": "redux-project",
-            "script": "server.js",
-            "watch": true,
-            "merge_logs": true,
-            "env": {
-                "NODE_ENV": "production",
-                "PG_USER": "rev",
-                "PG_DATABASE": "rev",
-                "PG_PASSWORD": "rev",
-                "APP_PORT": 8001
-            }
-        }
-    ]
+  "apps": [
+    {
+      "name": "redux-project",
+      "script": "server.js",
+      "watch": true,
+      "merge_logs": true,
+      "env": {
+        "NODE_ENV": "production",
+        "PG_USER": "rev",
+        "PG_DATABASE": "rev",
+        "PG_PASSWORD": "rev",
+        "APP_PORT": 8001
+      }
+    }
+  ]
 }

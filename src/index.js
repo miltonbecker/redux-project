@@ -9,8 +9,8 @@ import thunkMiddleware from 'redux-thunk';
 let store = createStore(commentApp, applyMiddleware(thunkMiddleware));
 
 render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
 );

@@ -13,87 +13,87 @@ export const DELETING_ERROR = 'DELETING_ERROR';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 const fetchingComments = () => ({
-    type: FETCHING_COMMENTS
+  type: FETCHING_COMMENTS
 });
 
 const fetchedComments = (json) => ({
-    type: FETCHED_COMMENTS,
-    result: json
+  type: FETCHED_COMMENTS,
+  result: json
 });
 
 const fetchingError = (err) => ({
-    type: FETCHING_ERROR,
-    error: err
+  type: FETCHING_ERROR,
+  error: err
 });
 
 const addedComment = (json) => ({
-    type: ADDED_COMMENT,
-    comment: json
+  type: ADDED_COMMENT,
+  comment: json
 });
 
 const addingError = (err) => ({
-    type: ADDING_ERROR,
-    error: err
+  type: ADDING_ERROR,
+  error: err
 });
 
 const deletedComment = (cid) => ({
-    type: DELETED_COMMENT,
-    id: cid
+  type: DELETED_COMMENT,
+  id: cid
 });
 
 const deletingError = (err) => ({
-    type: DELETING_ERROR,
-    error: err
+  type: DELETING_ERROR,
+  error: err
 });
 
 const clearErrors = () => ({
-    type: CLEAR_ERRORS
+  type: CLEAR_ERRORS
 });
 
 export const fetchComments = () => (dispatch) => {
-    dispatch(fetchingComments());
+  dispatch(fetchingComments());
 
-    return $.get('api/comments')
-        .done((data) => {
-            dispatch(fetchedComments(JSON.parse(data).reverse()));
-        })
-        .fail((jqObj, error, statusText) => {
-            dispatch(fetchingError(statusText));
-        });
+  return $.get('api/comments')
+    .done((data) => {
+      dispatch(fetchedComments(JSON.parse(data).reverse()));
+    })
+    .fail((jqObj, error, statusText) => {
+      dispatch(fetchingError(statusText));
+    });
 };
 
 export const addComment = (obj) => (dispatch) => {
-    dispatch(clearErrors());
+  dispatch(clearErrors());
 
-    let softKey = uuid();
-    let tempComment = { ...obj, key: softKey };
+  let softKey = uuid();
+  let tempComment = { ...obj, key: softKey };
 
-    dispatch(addedComment(tempComment));
+  dispatch(addedComment(tempComment));
 
-    return $.ajax('api/comments', {
-        data: JSON.stringify(obj),
-        contentType: 'application/json',
-        type: 'POST'
+  return $.ajax('api/comments', {
+    data: JSON.stringify(obj),
+    contentType: 'application/json',
+    type: 'POST'
+  })
+    .done((data) => {
+      dispatch(fetchComments());
     })
-        .done((data) => {
-            dispatch(fetchComments());
-        })
-        .fail((jqObj, error, statusText) => {
-            dispatch(deletedComment(softKey));
-            dispatch(addingError(statusText));
-        });
+    .fail((jqObj, error, statusText) => {
+      dispatch(deletedComment(softKey));
+      dispatch(addingError(statusText));
+    });
 };
 
 export const deleteComment = (id) => (dispatch) => {
-    dispatch(clearErrors());
+  dispatch(clearErrors());
 
-    dispatch(deletedComment(id));
+  dispatch(deletedComment(id));
 
-    return $.ajax(`api/comments/${id}`, {
-        type: 'DELETE'
-    })
-        .fail((jqObj, error, statusText) => {
-            dispatch(deletingError(statusText));
-            dispatch(fetchComments());
-        });
+  return $.ajax(`api/comments/${id}`, {
+    type: 'DELETE'
+  })
+    .fail((jqObj, error, statusText) => {
+      dispatch(deletingError(statusText));
+      dispatch(fetchComments());
+    });
 }
