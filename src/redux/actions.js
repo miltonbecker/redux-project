@@ -66,7 +66,7 @@ export const addComment = (obj) => (dispatch) => {
     dispatch(clearErrors());
 
     let softKey = uuid();
-    let tempComment = Object.assign({}, obj, { key: softKey });
+    let tempComment = { ...obj, key: softKey };
 
     dispatch(addedComment(tempComment));
 
