@@ -6,7 +6,7 @@ const parser = require('body-parser');
 const app = express();
 
 const jsonParser = parser.json({
-  verify: function (req, res, buf, enc) {
+  verify(req, res, buf, enc) {
     try {
       JSON.parse(buf);
     } catch (error) {
