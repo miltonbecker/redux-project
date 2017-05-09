@@ -1,6 +1,4 @@
-LABEL maintainer="miltonbecker@gmail.com"
-
-FROM node:boron
+FROM node:7-slim
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -16,3 +14,5 @@ COPY . /usr/src/app
 EXPOSE 8000
 
 CMD [ "npm", "start" ]
+
+LABEL maintainer="miltonbecker@gmail.com"
