@@ -1,5 +1,32 @@
 This branch is live at http://miltonbecker.com:8001
 
+# How to run:
+
+## Dev environment:
+
+1. `npm install`
+2. `npm run dev`
+3. Access http://localhost:8000
+
+## Production environment without Docker
+
+1. `npm install`
+2. `npm run build`
+3. Make sure you have a Postgres instance up and running
+4. Edit the file `postgres.js` with your db info
+5. `npm start`
+6. Access http://localhost:8000
+
+## Dockerized 
+
+1. `npm install`
+2. Make sure you have Docker installed
+3. `npm run docker`
+4. You should now have 2 docker images: milton/comment-app and milton/comment-db
+5. To run the db: `docker run -d -p 5444:5432 milton/comment-db`
+6. To run the app: `docker run -d -p 8000:8000 --env-file docker.env milton/comment-app`
+7. Access http://localhost:8000
+
 # Features:
 
 * You can create and delete comments
@@ -19,4 +46,4 @@ This branch is live at http://miltonbecker.com:8001
   * `npm start` starts the server in production mode without the webpack hooks
   * `npm run dev` starts the server with the webpack hooks
   * `npm run build` generates the production bundle
-  * `npm run docker` generates the production bundle and creates the docker image
+  * `npm run docker` generates the production bundle and creates the docker images
