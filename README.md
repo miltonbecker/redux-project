@@ -13,7 +13,7 @@ This branch is live at http://miltonbecker.com:8001
 1. `npm install`
 2. `npm run build`
 3. Make sure you have a Postgres instance up and running
-4. Edit the file `postgres.js` with your db info
+4. Edit the file `postgres.js` with your db info (or set the env variables accordingly)
 5. `npm start`
 6. Access http://localhost:8000
 
