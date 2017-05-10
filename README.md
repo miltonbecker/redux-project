@@ -23,7 +23,9 @@ This branch is live at http://miltonbecker.com:8001
 2. Make sure you have Docker installed
 3. `npm run docker`
 4. You should now have 2 docker images: milton/comment-app and milton/comment-db
-5. To run the db: `docker run -d -p 5444:5432 milton/comment-db`
+5. To run the db: 
+* Without keeping the db changes: `docker run -d -p 5444:5432 milton/comment-db`
+* Keeping the db changes: `docker run -d -p 5444:5432 -v YourLocalPathToAnEmptyDirHere:/var/lib/postgresql/data milton/comment-d`
 6. To run the app: `docker run -d -p 8000:8000 --env-file docker.env milton/comment-app`
 7. Access http://localhost:8000
 
