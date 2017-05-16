@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   // or devtool: 'eval' to debug issues with compiled output:
@@ -13,7 +13,7 @@ module.exports = {
     './src/index'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public/dist'),
     filename: 'bundle.js',
     publicPath: '/dist/'
   },
