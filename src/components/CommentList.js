@@ -14,7 +14,7 @@ class CommentList extends Component {
             <div className="alert alert-danger" role="alert">
               There was an error getting the comments from the server.<br />
               Try refreshing the page.
-                        </div>
+            </div>
           }
 
           {this.props.deletingError &&
